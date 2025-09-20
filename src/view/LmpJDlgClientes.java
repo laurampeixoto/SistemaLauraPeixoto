@@ -330,8 +330,8 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-//        JDlgUsuarioPesquisar telaPesquisar = new JDlgUsuarioPesquisar(null, true);;
-//        telaPesquisar.setVisible(true);
+         LmpJDlgPesquisarClientes telaPesquisar = new LmpJDlgPesquisarClientes(null, true);
+        telaPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
