@@ -272,7 +272,6 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
         Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        int cod = Util.strToInt(jTxtCodigoProduto.getText());
         Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
