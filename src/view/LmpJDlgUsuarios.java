@@ -302,6 +302,8 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
         jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
+        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
