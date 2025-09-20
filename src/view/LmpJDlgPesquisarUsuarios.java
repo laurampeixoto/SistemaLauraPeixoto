@@ -84,9 +84,7 @@ public class LmpJDlgPesquisarUsuarios extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        int linSel = jTable1.getSelectedRow();
-         LmpJDlgUsuarios LmpJDlgUsuarios = null;
-        LmpJDlgUsuarios lmpJDlgUsuarios = (LmpJDlgUsuarios);
+        setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
