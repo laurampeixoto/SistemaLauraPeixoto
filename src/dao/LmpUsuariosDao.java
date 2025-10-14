@@ -25,8 +25,6 @@ public class LmpUsuariosDao extends LmpAbstractDao{
     @Override
     public void update(Object object) {
         session.beginTransaction();
-        session.flush();
-        session.clear();
         session.update(object);
         session.getTransaction().commit();        
     }
@@ -44,7 +42,7 @@ public class LmpUsuariosDao extends LmpAbstractDao{
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LmpUsuarios.class);
-        criteria.add(Restrictions.eq("idusuarios", codigo));
+        criteria.add(Restrictions.eq("lmp_idCodigo", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();        
         return lista;

@@ -5,6 +5,11 @@
  */
 package view;
 
+import bean.LmpUsuarios;
+import dao.LmpUsuariosDao;
+import java.util.List;
+import view.LmpJDlgUsuarios;
+
 
 
 /**
@@ -13,7 +18,8 @@ package view;
  */
 public class LmpJDlgPesquisarUsuarios extends javax.swing.JDialog {
     
-     LmpJDlgUsuarios LmpjDlgUsuarios;
+     private LmpJDlgUsuarios LmpjDlgUsuarios;
+     LmpControllerUsuarios lmpControllerUsuarios;
 
     /**
      * Creates new form LmpJDlgPesquisarUsuarios
@@ -22,6 +28,12 @@ public class LmpJDlgPesquisarUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Pesquisar Usuários");
+        lmpControllerUsuarios = new LmpControllerUsuarios();
+        LmpUsuariosDao lmpUsuariosDao = new LmpUsuariosDao();
+        List lista = (List) lmpUsuariosDao.listAll();
+        lmpControllerUsuarios.setList(lista);
+        jTable1.setModel(lmpControllerUsuarios);
     }
     
     public void setTelaPai(LmpJDlgUsuarios LmpjDlgUsuarios) {
@@ -45,10 +57,12 @@ public class LmpJDlgPesquisarUsuarios extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -64,19 +78,21 @@ public class LmpJDlgPesquisarUsuarios extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnOk)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 743, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnOk)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,7 +100,9 @@ public class LmpJDlgPesquisarUsuarios extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+       LmpUsuarios lmpUsuarios =  lmpControllerUsuarios.getBean( jTable1.getSelectedRow() );
+        LmpjDlgUsuarios.beanView(lmpUsuarios);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

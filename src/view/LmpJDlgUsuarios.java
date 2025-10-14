@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.LmpUsuarios;
+import dao.LmpUsuariosDao;
 import javax.swing.JOptionPane;
 import tools.Util;
 import static tools.Util.pergunta;
@@ -16,7 +18,7 @@ import static tools.Util.pergunta;
  */
 public class LmpJDlgUsuarios extends javax.swing.JDialog {
 
-
+ private boolean incluir;
 
 
     public LmpJDlgUsuarios(java.awt.Frame parent, boolean modal) {
@@ -29,6 +31,42 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
        
     }
     
+     public void beanView(LmpUsuarios lmpUsuarios) {
+        jTxtCodigo.setText(Util.intToStr(lmpUsuarios.getLmpIdCodigo()));
+        jTxtNome.setText(lmpUsuarios.getLmpNome());
+        jTxtApelido.setText(lmpUsuarios.getLmpApelido());
+        jFmtCpf.setText(lmpUsuarios.getLmpCpf());
+        jFmtDataDeNascimento.setText(Util.dateToStr(lmpUsuarios.getLmpDataNascimento()));
+        jPwfSenha.setText(lmpUsuarios.getLmpSenha());
+        jCboNivel.setSelectedIndex(Util.strToInt(lmpUsuarios.getLmpNivel()));
+        if (lmpUsuarios.getLmpAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
+     
+      public LmpUsuarios viewBean() {
+        LmpUsuarios lmpUsuarios = new LmpUsuarios();
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        lmpUsuarios.setLmpIdCodigo(codigo);
+        //usuarios.setIdusuarios(Util.strToInt( jTxtCodigo.getText() ));
+
+        lmpUsuarios.setLmpNome(jTxtNome.getText());
+        lmpUsuarios.setLmpApelido(jTxtApelido.getText());
+        lmpUsuarios.setLmpCpf(jFmtCpf.getText());
+        lmpUsuarios.setLmpDataNascimento(Util.strToDate(jFmtDataDeNascimento.getText()));
+        lmpUsuarios.setLmpSenha(jPwfSenha.getText());
+        lmpUsuarios.setLmpNivel(Util.intToStr(jCboNivel.getSelectedIndex()));
+        if (jChbAtivo.isSelected() == true) {
+            lmpUsuarios.setLmpAtivo("S");
+        } else {
+            lmpUsuarios.setLmpAtivo("N");
+        }
+        return lmpUsuarios;
+    }
+
 
 
     /**
@@ -274,15 +312,28 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (pergunta("Deseja excluir?")) {
-        JOptionPane.showMessageDialog(null, "Excluído!");
-    } 
-
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            LmpUsuariosDao lmpUsuariosDao = new LmpUsuariosDao();
+            lmpUsuariosDao.delete(viewBean());
+        }
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
+                jPwfSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+         LmpUsuariosDao lmpUsuariosDao = new  LmpUsuariosDao();
+        LmpUsuarios lmpUsuarios = viewBean();
+        if (incluir == true) {
+            lmpUsuariosDao.insert(lmpUsuarios);
+            
+        } else {
+            lmpUsuariosDao.update(lmpUsuarios);
+           
+        }
+        
+        
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
         jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
@@ -292,8 +343,9 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here: 
-       LmpJDlgPesquisarUsuarios telaPesquisar = new LmpJDlgPesquisarUsuarios(null, true);
-        telaPesquisar.setVisible(true);
+        LmpJDlgPesquisarUsuarios lmpJDlgUsuariosPesquisar = new LmpJDlgPesquisarUsuarios(null, true);
+        lmpJDlgUsuariosPesquisar.setTelaPai(this);
+        lmpJDlgUsuariosPesquisar.setVisible(true);
 
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -388,4 +440,5 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
+
 }
