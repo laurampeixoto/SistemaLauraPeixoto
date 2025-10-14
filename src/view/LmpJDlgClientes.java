@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.LmpClientes;
+import dao.LmpClientesDao;
 import javax.swing.JOptionPane;
 import tools.Util;
 import static tools.Util.pergunta;
@@ -14,6 +16,8 @@ import static tools.Util.pergunta;
  */
 public class LmpJDlgClientes extends javax.swing.JDialog {
 
+    private boolean incluir;
+
     /**
      * Creates new form LmpJDlgClientes
      */
@@ -22,9 +26,59 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade, jTxtNome, jTxtPais, jTxtProfissao,
-                jTxtSexo, jTxtTelefone, jChbAtivo, jFmtCpf, jFmtDataCadastro, jFmtDataNascimento, jPwdSenha, jBtnCancelar,
-                jBtnConfirmar);
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade,
+                jTxtPais, jTxtProfissao, jTxtSexo, jTxtTelefone, jChbAtivo, jFmtCpf, jFmtDataCadastro, jFmtDataNascimento,
+                jPwdSenha, jBtnCancelar, jBtnConfirmar);
+    }
+
+    public void beanView(LmpClientes lmpClientes) {
+        jTxtCodigo.setText(Util.intToStr(lmpClientes.getLmpIdCodigo()));
+        jTxtNome.setText(lmpClientes.getLmpNome());
+        jTxtEmail.setText(lmpClientes.getLmpEmail());
+        jTxtEndereco.setText(lmpClientes.getLmpEndereco());
+        jTxtEstado.setText(lmpClientes.getLmpEstado());
+        jTxtNacionalidade.setText(lmpClientes.getLmpNacionalidade());
+        jTxtPais.setText(lmpClientes.getLmpPais());
+        jTxtProfissao.setText(lmpClientes.getLmpProfissao());
+        jTxtTelefone.setText(lmpClientes.getLmpTelefone());
+        jTxtSexo.setText(lmpClientes.getLmpSexo());
+        jFmtCpf.setText(lmpClientes.getLmpCpf());
+        jFmtDataNascimento.setText(Util.dateToStr(lmpClientes.getLmpDataNascimento()));
+        jFmtDataCadastro.setText(Util.dateToStr(lmpClientes.getLmpDataCadastro()));
+        jPwdSenha.setText(lmpClientes.getLmpSenha());
+
+        if (lmpClientes.getLmpAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
+
+    public LmpClientes viewBean() {
+        LmpClientes lmpClientes = new LmpClientes();
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        lmpClientes.setLmpIdCodigo(Util.strToInt( jTxtCodigo.getText() ));
+
+        lmpClientes.setLmpNome(jTxtNome.getText());
+        lmpClientes.setLmpEmail(jTxtEmail.getText());
+        lmpClientes.setLmpEndereco(jTxtEndereco.getText());
+        lmpClientes.setLmpEstado(jTxtEstado.getText());
+        lmpClientes.setLmpNacionalidade(jTxtNacionalidade.getText());
+        lmpClientes.setLmpPais(jTxtPais.getText());
+        lmpClientes.setLmpProfissao(jTxtProfissao.getText());
+        lmpClientes.setLmpTelefone(jTxtTelefone.getText());
+        lmpClientes.setLmpSexo(jTxtSexo.getText());
+        lmpClientes.setLmpCpf(jFmtCpf.getText());
+        lmpClientes.setLmpDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
+        lmpClientes.setLmpDataCadastro(Util.strToDate(jFmtDataCadastro.getText()));
+        lmpClientes.setLmpSenha(jPwdSenha.getText());
+        if (jChbAtivo.isSelected() == true) {
+            lmpClientes.setLmpAtivo("S");
+        } else {
+            lmpClientes.setLmpAtivo("N");
+        }
+        return lmpClientes;
     }
 
     /**
@@ -309,6 +363,14 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        LmpClientesDao lmpClientesDao = new LmpClientesDao();
+        LmpClientes lmpClientes = viewBean();
+        if (incluir == true) {
+            lmpClientesDao.insert(lmpClientes);
+        } else {
+            lmpClientesDao.update(lmpClientes);
+        }
+
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade, jTxtNome, jTxtPais, jTxtProfissao,
                 jTxtSexo, jTxtTelefone, jChbAtivo, jBtnIncluir, jFmtCpf, jFmtDataCadastro, jFmtDataNascimento, jPwdSenha, jBtnConfirmar,
                 jBtnCancelar);
@@ -329,12 +391,14 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-         LmpJDlgPesquisarClientes telaPesquisar = new LmpJDlgPesquisarClientes(null, true);
-        telaPesquisar.setVisible(true);
+        LmpJDlgPesquisarClientes lmpJDlgClientesPesquisar = new LmpJDlgPesquisarClientes(null, true);
+        lmpJDlgClientesPesquisar.setTelaPai(this);
+        lmpJDlgClientesPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade, jTxtNome, jTxtPais, jTxtProfissao,
                 jTxtSexo, jTxtTelefone, jChbAtivo, jBtnIncluir, jFmtCpf, jFmtDataCadastro, jFmtDataNascimento, jPwdSenha, jBtnConfirmar,
                 jBtnCancelar);
@@ -343,13 +407,17 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (pergunta("Deseja excluir?")) {
-            JOptionPane.showMessageDialog(null, "Excluído!");
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            LmpClientesDao lmpClientesDao = new LmpClientesDao();
+            lmpClientesDao.delete(viewBean());
         }
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade, jTxtNome, jTxtPais, jTxtProfissao,
+                jTxtSexo, jTxtTelefone, jChbAtivo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        incluir = false;
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade, jTxtNome, jTxtPais, jTxtProfissao,
                 jTxtSexo, jTxtTelefone, jChbAtivo, jBtnIncluir, jFmtCpf, jFmtDataCadastro, jFmtDataNascimento, jPwdSenha, jBtnConfirmar,
                 jBtnCancelar);

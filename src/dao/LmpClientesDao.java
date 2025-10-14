@@ -24,9 +24,7 @@ public class LmpClientesDao extends LmpAbstractDao {
 
     @Override
     public void update(Object object) {
-        session.beginTransaction();
-        session.flush();
-        session.clear();
+        session.beginTransaction();   
         session.update(object);
         session.getTransaction().commit();        
     }

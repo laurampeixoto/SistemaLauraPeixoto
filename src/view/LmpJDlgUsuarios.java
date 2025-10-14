@@ -50,8 +50,8 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
       public LmpUsuarios viewBean() {
         LmpUsuarios lmpUsuarios = new LmpUsuarios();
         int codigo = Util.strToInt(jTxtCodigo.getText());
-        lmpUsuarios.setLmpIdCodigo(codigo);
-        //usuarios.setIdusuarios(Util.strToInt( jTxtCodigo.getText() ));
+//        lmpUsuarios.setLmpIdCodigo(codigo);
+        lmpUsuarios.setLmpIdCodigo(Util.strToInt( jTxtCodigo.getText() ));
 
         lmpUsuarios.setLmpNome(jTxtNome.getText());
         lmpUsuarios.setLmpApelido(jTxtApelido.getText());
@@ -296,16 +296,17 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
+         incluir = true;
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
          jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-
 
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
+        incluir = false;
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
          jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
