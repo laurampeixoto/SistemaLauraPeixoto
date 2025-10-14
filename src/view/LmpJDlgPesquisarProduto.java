@@ -5,12 +5,17 @@
  */
 package view;
 
+import bean.LmpProduto;
+import dao.LmpProdutoDao;
+import java.util.List;
+
 /**
  *
  * @author laura
  */
 public class LmpJDlgPesquisarProduto extends javax.swing.JDialog {
-    LmpJDlgProduto LmpjDlgProduto;
+    private LmpJDlgProduto LmpjDlgProduto;
+     LmpControllerProduto lmpControllerProduto;
     /**
      * Creates new form LmpJDlgPesquisarProduto
      */
@@ -18,9 +23,15 @@ public class LmpJDlgPesquisarProduto extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Pesquisar Produtos");
+        lmpControllerProduto = new LmpControllerProduto();
+        LmpProdutoDao lmpProdutoDao = new LmpProdutoDao();
+        List lista = (List) lmpProdutoDao.listAll();
+        lmpControllerProduto.setList(lista);
+        jTable1.setModel(lmpControllerProduto);
     }
     
-     public void setTelaPai(LmpJDlgFuncionarios LmpjDlgFuncionarios) {
+     public void setTelaPai(LmpJDlgProduto LmpjDlgProduto) {
         this.LmpjDlgProduto = LmpjDlgProduto;
     }
 
@@ -48,10 +59,12 @@ public class LmpJDlgPesquisarProduto extends javax.swing.JDialog {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -60,11 +73,13 @@ public class LmpJDlgPesquisarProduto extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 824, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnOk)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +95,9 @@ public class LmpJDlgPesquisarProduto extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        LmpProduto lmpProduto =  lmpControllerProduto.getBean( jTable1.getSelectedRow() );
+        LmpjDlgProduto.beanView(lmpProduto);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

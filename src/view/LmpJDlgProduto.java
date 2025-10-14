@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.LmpProduto;
+import dao.LmpProdutoDao;
 import javax.swing.JOptionPane;
 import tools.Util;
 import static tools.Util.pergunta;
@@ -14,7 +16,8 @@ import static tools.Util.pergunta;
  * @author laura
  */
 public class LmpJDlgProduto extends javax.swing.JDialog {
-
+    private boolean incluir;
+    
     /**
      * Creates new form LmpJDlgProduto
      */
@@ -25,6 +28,40 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao,
                 jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
+    }
+    
+    public void beanView(LmpProduto lmpProduto) {
+        jTxtCodigoProduto.setText(Util.intToStr(lmpProduto.getLmpIdCodigoProduto()));
+        jTxtNome.setText(lmpProduto.getLmpNome());
+        jTxtPreco.setText(lmpProduto.getLmpPreco());
+        jTxtCategoria.setText(lmpProduto.getLmpCategoria());
+        jTxtDescricao.setText(lmpProduto.getLmpDescricao());
+        jTxtTamanho.setText(lmpProduto.getLmpTamanho());
+        if (lmpProduto.getLmpAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
+     
+      public LmpProduto viewBean() {
+        LmpProduto lmpProduto = new LmpProduto();
+        int codigo = Util.strToInt(jTxtCodigoProduto.getText());
+        lmpProduto.setLmpIdCodigoProduto(Util.strToInt( jTxtCodigoProduto.getText() ));
+
+        lmpProduto.setLmpNome(jTxtNome.getText());
+        lmpProduto.setLmpPreco(jTxtPreco.getText());
+        lmpProduto.setLmpCategoria(jTxtCategoria.getText());
+        lmpProduto.setLmpDescricao(jTxtDescricao.getText());
+        lmpProduto.setLmpTamanho(jTxtTamanho.getText());
+     
+        if (jChbAtivo.isSelected() == true) {
+            lmpProduto.setLmpAtivo("S");
+        } else {
+            lmpProduto.setLmpAtivo("N");
+        }
+        return lmpProduto;
     }
 
     /**
@@ -256,6 +293,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        incluir = false;
         Util.habilitar(true, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
@@ -263,13 +301,23 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (pergunta("Deseja excluir?")) {
-            JOptionPane.showMessageDialog(null, "Excluído!");
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            LmpProdutoDao lmpProdutoDao = new LmpProdutoDao();
+            lmpProdutoDao.delete(viewBean());
         }
+        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        LmpProdutoDao lmpProdutoDao = new  LmpProdutoDao();
+        LmpProduto lmpProduto = viewBean();
+        if (incluir == true) {
+            lmpProdutoDao.insert(lmpProduto);   
+        } else {
+            lmpProdutoDao.update(lmpProduto);          
+        }
+        
         Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
@@ -284,8 +332,9 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        LmpJDlgPesquisarProduto telaPesquisar = new LmpJDlgPesquisarProduto(null, true);
-        telaPesquisar.setVisible(true);
+      LmpJDlgPesquisarProduto lmpJDlgProdutoPesquisar = new LmpJDlgPesquisarProduto(null, true);
+        lmpJDlgProdutoPesquisar.setTelaPai(this);
+        lmpJDlgProdutoPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jTxtCodigoProdutoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoProdutoFocusLost
@@ -298,6 +347,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+       incluir = true;
         Util.habilitar(true, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao,
                 jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
