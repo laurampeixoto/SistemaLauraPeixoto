@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.LmpFuncionarios;
+import dao.LmpFuncionariosDao;
 import javax.swing.JOptionPane;
 import tools.Util;
 import static tools.Util.pergunta;
@@ -14,7 +16,7 @@ import static tools.Util.pergunta;
  * @author laura
  */
 public class LmpJDlgFuncionarios extends javax.swing.JDialog {
-
+    private boolean incluir;
     /**
      * Creates new form LmpJDlgFuncionario
      */
@@ -24,9 +26,34 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
         setTitle("Cadastro de Funcionários");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
-                jFmtDataAdmissao, jBtnCancelar,
-                jBtnConfirmar);
+                jFmtDataAdmissao, jBtnCancelar, jBtnConfirmar);
     }
+    
+    public void beanView(LmpFuncionarios lmpFuncionarios) {
+        jTxtCodigo.setText(Util.intToStr(lmpFuncionarios.getLmpIdFuncionario()));
+        jTxtNome.setText(lmpFuncionarios.getLmpNome());
+        jTxtCargo.setText(lmpFuncionarios.getLmpCargo());
+        jTxtEmail.setText(lmpFuncionarios.getLmpEmail());
+        jTxtTelefone.setText(lmpFuncionarios.getLmpTelefone());
+        jFmtCpf.setText(lmpFuncionarios.getLmpCpf());
+        jFmtDataAdmissao.setText(Util.dateToStr(lmpFuncionarios.getLmpDataAdmissao()));
+        
+    }
+     
+      public LmpFuncionarios viewBean() {
+        LmpFuncionarios lmpFuncionarios = new LmpFuncionarios();
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        lmpFuncionarios.setLmpIdFuncionario(Util.strToInt( jTxtCodigo.getText() ));
+
+        lmpFuncionarios.setLmpNome(jTxtNome.getText());
+        lmpFuncionarios.setLmpCargo(jTxtCargo.getText());
+        lmpFuncionarios.setLmpEmail(jTxtEmail.getText());
+        lmpFuncionarios.setLmpTelefone(jTxtTelefone.getText());
+        lmpFuncionarios.setLmpCpf(jFmtCpf.getText());
+        lmpFuncionarios.setLmpDataAdmissao(Util.strToDate(jFmtDataAdmissao.getText()));    
+        return lmpFuncionarios;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -234,6 +261,7 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
                 jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
@@ -250,8 +278,9 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        LmpJDlgPesquisarFuncionarios telaPesquisar = new LmpJDlgPesquisarFuncionarios(null, true);
-        telaPesquisar.setVisible(true);
+        LmpJDlgPesquisarFuncionarios lmpJDlgFuncionariosPesquisar = new LmpJDlgPesquisarFuncionarios(null, true);
+        lmpJDlgFuncionariosPesquisar.setTelaPai(this);
+        lmpJDlgFuncionariosPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
@@ -260,6 +289,7 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
+        incluir = false;
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
                 jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
@@ -271,9 +301,12 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (pergunta("Deseja excluir?")) {
-            JOptionPane.showMessageDialog(null, "Excluído!");
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            LmpFuncionariosDao lmpFuncionariosDao = new LmpFuncionariosDao();
+            lmpFuncionariosDao.delete(viewBean());
         }
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
+                jFmtDataAdmissao);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jTxtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTelefoneActionPerformed
@@ -282,6 +315,14 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+         LmpFuncionariosDao lmpFuncionariosDao = new  LmpFuncionariosDao();
+        LmpFuncionarios lmpFuncionarios = viewBean();
+        if (incluir == true) {
+            lmpFuncionariosDao.insert(lmpFuncionarios);            
+        } else {
+            lmpFuncionariosDao.update(lmpFuncionarios);
+        }
+        
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
                 jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
