@@ -17,6 +17,7 @@ import static tools.Util.pergunta;
 public class LmpJDlgClientes extends javax.swing.JDialog {
 
     private boolean incluir;
+    private boolean escuro = false;
 
     /**
      * Creates new form LmpJDlgClientes
@@ -125,6 +126,7 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
         jFmtDataNascimento = new javax.swing.JFormattedTextField();
         jLabel8 = new javax.swing.JLabel();
         jPwdSenha = new javax.swing.JPasswordField();
+        jBtnModo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -218,6 +220,13 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
 
         jLabel8.setText("Senha");
 
+        jBtnModo.setText("🌙 Modo Escuro");
+        jBtnModo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnModoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -276,6 +285,10 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jBtnPesquisar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnModo)
+                .addGap(366, 366, 366))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,7 +364,9 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
                     .addComponent(jBtnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnCancelar)
                     .addComponent(jBtnPesquisar))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(jBtnModo)
+                .addContainerGap())
         );
 
         pack();
@@ -428,6 +443,13 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtEnderecoActionPerformed
 
+    private void jBtnModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModoActionPerformed
+        // TODO add your handling code here:
+        tools.TemaUtil.alternarTema(this);
+        escuro = !escuro;
+        jBtnModo.setText(escuro ? "☀ Modo Claro" : "🌙 Modo Escuro");
+    }//GEN-LAST:event_jBtnModoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -476,6 +498,7 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
     private javax.swing.JButton jBtnConfirmar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
+    private javax.swing.JButton jBtnModo;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JCheckBox jChbAtivo;
     private javax.swing.JFormattedTextField jFmtCpf;

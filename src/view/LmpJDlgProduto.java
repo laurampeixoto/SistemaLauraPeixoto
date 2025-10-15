@@ -17,6 +17,7 @@ import static tools.Util.pergunta;
  */
 public class LmpJDlgProduto extends javax.swing.JDialog {
     private boolean incluir;
+    private boolean escuro = false;
     
     /**
      * Creates new form LmpJDlgProduto
@@ -93,6 +94,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         jTxtDescricao = new javax.swing.JTextField();
         jTxtTamanho = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jBtnModo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -182,6 +184,13 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
 
         jLabel10.setText("Tamanho");
 
+        jBtnModo.setText("🌙 Modo Escuro");
+        jBtnModo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnModoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,19 +217,18 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
                                     .addComponent(jLabel9)
                                     .addComponent(jTxtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
-                                    .addComponent(jTxtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jTxtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBtnModo))))
                         .addGap(88, 88, 88))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jChbAtivo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8))
                             .addComponent(jLabel4)
                             .addComponent(jTxtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jChbAtivo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addGap(346, 346, 346))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(64, 64, 64)
@@ -270,11 +278,13 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jChbAtivo)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(114, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnModo)))
+                .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap(366, Short.MAX_VALUE)
@@ -362,6 +372,13 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtTamanhoActionPerformed
 
+    private void jBtnModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModoActionPerformed
+        // TODO add your handling code here:
+        tools.TemaUtil.alternarTema(this);
+        escuro = !escuro;
+        jBtnModo.setText(escuro ? "☀ Modo Claro" : "🌙 Modo Escuro");
+    }//GEN-LAST:event_jBtnModoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +427,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
     private javax.swing.JButton jBtnConfirmar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnIncluir;
+    private javax.swing.JButton jBtnModo;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JCheckBox jChbAtivo;
     private javax.swing.JLabel jLabel1;
