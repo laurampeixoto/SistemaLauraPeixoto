@@ -308,7 +308,9 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf, jCboNivel, jBtnIncluir,
                 jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
+                jPwfSenha, jCboNivel, jChbAtivo);
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -317,6 +319,7 @@ public class LmpJDlgUsuarios extends javax.swing.JDialog {
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf, jCboNivel, jBtnIncluir,
                 jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

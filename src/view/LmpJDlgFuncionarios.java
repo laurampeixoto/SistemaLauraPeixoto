@@ -279,6 +279,8 @@ public class LmpJDlgFuncionarios extends javax.swing.JDialog {
         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
                 jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtEmail, jTxtCargo, jTxtEmail, jTxtTelefone, jFmtCpf,
+                jFmtDataAdmissao);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

@@ -418,6 +418,8 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
                 jTxtSexo, jTxtTelefone, jChbAtivo, jBtnIncluir, jFmtCpf, jFmtDataCadastro, jFmtDataNascimento, jPwdSenha, jBtnConfirmar,
                 jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtEmail, jTxtEndereco, jTxtEstado, jTxtNacionalidade, jTxtNome, jTxtPais, jTxtProfissao,
+                jTxtSexo, jTxtTelefone, jChbAtivo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

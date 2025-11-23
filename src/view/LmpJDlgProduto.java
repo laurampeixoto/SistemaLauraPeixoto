@@ -361,7 +361,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         Util.habilitar(true, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao,
                 jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-
+        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jTxtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCategoriaActionPerformed
