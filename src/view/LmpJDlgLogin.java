@@ -21,6 +21,8 @@ public class LmpJDlgLogin extends javax.swing.JDialog {
     public LmpJDlgLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Login");
+        setLocationRelativeTo(null);
     }
 
     /**

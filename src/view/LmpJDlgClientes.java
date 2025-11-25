@@ -134,6 +134,12 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
 
         jLabel11.setText("Data de Cadastro");
 
+        try {
+            jFmtDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabel12.setText("Nacionalidade");
 
         jLabel13.setText("Profissão");
@@ -153,6 +159,12 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
         });
 
         jLabel3.setText("CPF");
+
+        try {
+            jFmtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png"))); // NOI18N
         jBtnConfirmar.setText("Confirmar");
@@ -217,6 +229,12 @@ public class LmpJDlgClientes extends javax.swing.JDialog {
         jChbAtivo.setText("Ativo");
 
         jLabel7.setText("Data de Nascimento");
+
+        try {
+            jFmtDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel8.setText("Senha");
 
