@@ -75,7 +75,7 @@ public class LmpVendasItens  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="lmp_vendas")
+    @JoinColumn(name="lmp_idnumeroVenda")
     public LmpVendas getLmpVendas() {
         return this.lmpVendas;
     }

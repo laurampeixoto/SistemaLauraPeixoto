@@ -442,14 +442,14 @@ public class LmpJDlgVendas extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
 //         TODO add your handling code here:
-       incluir = false;
-        Util.habilitar(true, jTxtNumeroVenda, jTxtCodigo, jTxtStatus, jTxtEnviado,
+        Util.habilitar(true, jTxtStatus, jTxtEnviado,
                 jTxtValorTotal, jFmtDataVenda, jCboPagamento, jCboFuncionarios, jCboClientes,
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtNumeroVenda, jTxtCodigo, jTxtStatus, jTxtEnviado,
-                jTxtValorTotal, jFmtDataVenda, jCboPagamento);
+//        Util.limpar(jTxtNumeroVenda, jTxtCodigo, jTxtStatus, jTxtEnviado,
+//                jTxtValorTotal, jFmtDataVenda, jCboPagamento);
         controllerVendItens.setList(new ArrayList());
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed

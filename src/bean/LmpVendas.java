@@ -145,16 +145,5 @@ public class LmpVendas implements java.io.Serializable {
     public void setLmpFuncionarios(LmpFuncionarios lmpFuncionarios) {
         this.lmpFuncionarios = lmpFuncionarios;
     }
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lmp_produto")
-    public LmpProduto getLmpProduto() {
-        return this.lmpProduto;
-    }
-
-    public void setLmpProduto(LmpProduto lmpProduto) {
-        this.lmpProduto = lmpProduto;
-    }
-    
 
 }
