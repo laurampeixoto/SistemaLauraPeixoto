@@ -60,7 +60,7 @@ public class Util {
     }
     
     public static Date strToDate(String data) {
-          SimpleDateFormat fm = new SimpleDateFormat("dd/MM/YYYY");
+          SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
         try {
             return fm.parse(data);
         } catch (ParseException ex) {
@@ -70,7 +70,7 @@ public class Util {
     }
 
     public static String dateToStr(Date data) {
-        SimpleDateFormat fm = new SimpleDateFormat("dd/MM/YYYY");
+        SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
         return fm.format(data);
     }
     

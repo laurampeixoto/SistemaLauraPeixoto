@@ -122,7 +122,10 @@ public class LmpProduto  implements java.io.Serializable {
         this.lmpAtivo = lmpAtivo;
     }
 
-
+    @Override
+    public String toString() {
+        return this.lmpNome;
+    }
 
 
 }
