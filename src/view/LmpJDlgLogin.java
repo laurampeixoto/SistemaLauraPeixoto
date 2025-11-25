@@ -5,6 +5,10 @@
  */
 package view;
 
+import bean.LmpUsuarios;
+import dao.LmpUsuariosDao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author laura
@@ -102,8 +106,24 @@ public class LmpJDlgLogin extends javax.swing.JDialog {
 
     private void lmpBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lmpBtnOkActionPerformed
         // TODO add your handling code here:
-//        LmpJDlgLogin lmpJDlgLogin = new LmpJDlgLogin();
-        setVisible(false);
+        String usuario = jTxtUsuario.getText();
+        String senha = new String(jPwdSenha.getPassword());
+
+        LmpUsuariosDao dao = new LmpUsuariosDao();
+        LmpUsuarios logado = dao.autenticar(usuario, senha);
+
+        // Verifica se encontrou
+        if (logado != null) {
+            // Login ok
+            JOptionPane.showMessageDialog(this, "Bem-vindo, " + logado.getLmpNome() + "!");
+            setVisible(false);
+            dispose();
+            LmpJFrmPrincipal telaPrincipal = new LmpJFrmPrincipal();
+            telaPrincipal.setVisible(true);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Usuário ou senha inválidos!");
+        }
     }//GEN-LAST:event_lmpBtnOkActionPerformed
 
     /**

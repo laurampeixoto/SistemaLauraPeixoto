@@ -14,28 +14,29 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author laura
  */
-public class LmpUsuariosDao extends LmpAbstractDao{
+public class LmpUsuariosDao extends LmpAbstractDao {
+
     @Override
     public void insert(Object object) {
         session.beginTransaction();
         session.save(object);
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
     }
 
     @Override
     public void update(Object object) {
         session.beginTransaction();
         session.update(object);
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
         session.beginTransaction();
         session.flush();
-        session.clear();        
+        session.clear();
         session.delete(object);
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
     }
 
     @Override
@@ -44,7 +45,7 @@ public class LmpUsuariosDao extends LmpAbstractDao{
         Criteria criteria = session.createCriteria(LmpUsuarios.class);
         criteria.add(Restrictions.eq("lmp_idCodigo", codigo));
         List lista = criteria.list();
-        session.getTransaction().commit();        
+        session.getTransaction().commit();
         return lista;
     }
 
@@ -53,12 +54,22 @@ public class LmpUsuariosDao extends LmpAbstractDao{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LmpUsuarios.class);
         List lista = criteria.list();
-        session.getTransaction().commit();        
-        return lista;    
+        session.getTransaction().commit();
+        return lista;
     }
 
     public static void main(String[] args) {
         LmpUsuariosDao lmpUsuariosDao = new LmpUsuariosDao();
         lmpUsuariosDao.listAll();
+    }
+
+    public LmpUsuarios autenticar(String lmpApelido, String lmpSenha) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LmpUsuarios.class);
+        criteria.add(Restrictions.eq("lmpApelido", lmpApelido));
+        criteria.add(Restrictions.eq("lmpSenha", lmpSenha));
+        LmpUsuarios usuario = (LmpUsuarios) criteria.uniqueResult();
+        session.getTransaction().commit();
+        return usuario; 
     }
 }
