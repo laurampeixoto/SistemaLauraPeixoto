@@ -122,7 +122,10 @@ public class LmpFuncionarios  implements java.io.Serializable {
         this.lmpDataAdmissao = lmpDataAdmissao;
     }
 
-
+     @Override
+    public String toString() {
+        return this.lmpNome + " - " + this.lmpNome;
+    }
 
 
 }

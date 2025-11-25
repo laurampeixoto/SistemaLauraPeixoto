@@ -28,7 +28,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao,
-                jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
+                jCboTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
     }
     
     public void beanView(LmpProduto lmpProduto) {
@@ -37,7 +37,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         jTxtPreco.setText(lmpProduto.getLmpPreco());
         jTxtCategoria.setText(lmpProduto.getLmpCategoria());
         jTxtDescricao.setText(lmpProduto.getLmpDescricao());
-        jTxtTamanho.setText(lmpProduto.getLmpTamanho());
+//        jCboTamanho.setSelectedIndex(lmpProduto.getLmpTamanho());
         if (lmpProduto.getLmpAtivo().equals("S") == true) {
             jChbAtivo.setSelected(true);
         } else {
@@ -55,7 +55,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         lmpProduto.setLmpPreco(jTxtPreco.getText());
         lmpProduto.setLmpCategoria(jTxtCategoria.getText());
         lmpProduto.setLmpDescricao(jTxtDescricao.getText());
-        lmpProduto.setLmpTamanho(jTxtTamanho.getText());
+//        lmpProduto.setLmpTamanho(jCboTamanho.getSelectedIndex()); 
      
         if (jChbAtivo.isSelected() == true) {
             lmpProduto.setLmpAtivo("S");
@@ -92,9 +92,9 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         jTxtCategoria = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTxtDescricao = new javax.swing.JTextField();
-        jTxtTamanho = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jBtnModo = new javax.swing.JButton();
+        jCboTamanho = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -176,12 +176,6 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
 
         jLabel9.setText("Categoria");
 
-        jTxtTamanho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtTamanhoActionPerformed(evt);
-            }
-        });
-
         jLabel10.setText("Tamanho");
 
         jBtnModo.setText("🌙 Modo Escuro");
@@ -190,6 +184,8 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
                 jBtnModoActionPerformed(evt);
             }
         });
+
+        jCboTamanho.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PP", "P", "M", "G", "GG" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,8 +213,8 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
                                     .addComponent(jLabel9)
                                     .addComponent(jTxtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
-                                    .addComponent(jTxtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jBtnModo))))
+                                    .addComponent(jBtnModo)
+                                    .addComponent(jCboTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(88, 88, 88))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,12 +269,13 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTxtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCboTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jChbAtivo)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -304,7 +301,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Util.habilitar(true, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo,
+        Util.habilitar(true, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
@@ -315,7 +312,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
             LmpProdutoDao lmpProdutoDao = new LmpProdutoDao();
             lmpProdutoDao.delete(viewBean());
         }
-        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
+        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -328,16 +325,16 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
             lmpProdutoDao.update(lmpProduto);          
         }
         
-        Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
+        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
+        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -359,18 +356,14 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
         // TODO add your handling code here:
        incluir = true;
         Util.habilitar(true, jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao,
-                jTxtTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
+                jCboTamanho, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jTxtTamanho, jChbAtivo);
+        Util.limpar(jTxtNome, jTxtCodigoProduto, jTxtPreco, jTxtCategoria, jTxtDescricao, jCboTamanho, jChbAtivo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jTxtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtCategoriaActionPerformed
-
-    private void jTxtTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTamanhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtTamanhoActionPerformed
 
     private void jBtnModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModoActionPerformed
         // TODO add your handling code here:
@@ -429,6 +422,7 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnModo;
     private javax.swing.JButton jBtnPesquisar;
+    private javax.swing.JComboBox jCboTamanho;
     private javax.swing.JCheckBox jChbAtivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -442,6 +436,5 @@ public class LmpJDlgProduto extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtDescricao;
     private javax.swing.JTextField jTxtNome;
     private javax.swing.JTextField jTxtPreco;
-    private javax.swing.JTextField jTxtTamanho;
     // End of variables declaration//GEN-END:variables
 }

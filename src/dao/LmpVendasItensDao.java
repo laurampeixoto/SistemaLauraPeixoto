@@ -5,6 +5,7 @@
  */
 package dao;
 
+import bean.LmpVendas;
 import bean.LmpVendasItens;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -43,6 +44,15 @@ public class LmpVendasItensDao extends LmpAbstractDao{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LmpVendasItens.class);
         criteria.add(Restrictions.eq("lmp_idItemVendido", codigo));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+    
+     public Object listProduto(LmpVendas lmpVendas) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LmpVendasItens.class);
+        criteria.add(Restrictions.eq("lmpVendas", lmpVendas));
         List lista = criteria.list();
         session.getTransaction().commit();        
         return lista;

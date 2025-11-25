@@ -4,7 +4,11 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -42,22 +46,32 @@ public class Util {
     public static int strToInt(String num) {
         return Integer.valueOf(num);
     }
+
     public static String intToStr(int num) {
         return String.valueOf(num);
     }    
     
     public static double strToDouble(String num) {
-        return 0;
+        return Double.parseDouble(num);
     }
+
     public static String doubleToStr(double num) {
-        return "";
+        return String.valueOf(num);
     }
-        
+    
     public static Date strToDate(String data) {
+          SimpleDateFormat fm = new SimpleDateFormat("dd/MM/YYYY");
+        try {
+            return fm.parse(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
+
     public static String dateToStr(Date data) {
-        return "";
+        SimpleDateFormat fm = new SimpleDateFormat("dd/MM/YYYY");
+        return fm.format(data);
     }
     
     }

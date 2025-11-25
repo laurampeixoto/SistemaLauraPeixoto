@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package view;
 
@@ -9,57 +8,74 @@ import bean.LmpVendasItens;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+
 /**
  *
- * @author laura
+ * @author Marcos
  */
 public class LmpControllerVendasItens extends AbstractTableModel {
-    private List lstlmpVendasItens;
 
-    public void setList(List lstlmpVendasItensItens) {
-        this.lstlmpVendasItens = lstlmpVendasItens;
+    private List lstVendasItens;
+
+    public void setList(List lstVendasItens) {
+        this.lstVendasItens = lstVendasItens;
+        
+        this.fireTableDataChanged();
     }
     
     public LmpVendasItens getBean(int rowIndex) {
-        return (LmpVendasItens) lstlmpVendasItens.get(rowIndex);
+        return (LmpVendasItens) lstVendasItens.get(rowIndex);
     }
 
+    public void addBean(LmpVendasItens lmpVendasItens) {
+        lstVendasItens.add(lmpVendasItens);
+        this.fireTableDataChanged();
+    }
+    
+    public void removeBean(int rowIndex) {
+        lstVendasItens.remove(rowIndex);
+        this.fireTableDataChanged();
+    }
+    
     @Override
     public int getRowCount() {
-        return lstlmpVendasItens.size();
-                
+        return lstVendasItens.size();                
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        LmpVendasItens lmpVendasItens = (LmpVendasItens) lstlmpVendasItens.get( rowIndex);
+        LmpVendasItens lmpVendasItens = (LmpVendasItens) lstVendasItens.get( rowIndex);
         if ( columnIndex == 0 ){
             return lmpVendasItens.getLmpIdItemVendido();
         } else if (columnIndex ==1) {
-            return lmpVendasItens.getLmpProduto();        
+            return lmpVendasItens.getLmpProduto();
         } else if (columnIndex ==2) {
             return lmpVendasItens.getLmpQuantidade();
         } else if (columnIndex ==3) {
             return lmpVendasItens.getLmpPrecoUnitario();
+        }else if (columnIndex ==4) {
+            return lmpVendasItens.getLmpPrecoUnitario()*lmpVendasItens.getLmpQuantidade();
         }
-        return "";
+        return ""; 
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         if ( columnIndex == 0) {
-            return "Item Vendido";
+            return "Código";
         } else if ( columnIndex == 1) {
             return "Produto";         
         } else if ( columnIndex == 2) {
             return "Quantidade";
         } else if ( columnIndex == 3) {
-            return "Preço Unitário";
+            return "Valor Unitário";
+        } else if ( columnIndex == 4) {
+            return "Total";
         } 
         return "";
     }

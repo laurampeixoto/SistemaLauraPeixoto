@@ -5,11 +5,18 @@
  */
 package view;
 
+import tools.Util;
+import java.util.List;
+import bean.LmpProduto;
+import bean.LmpVendasItens;
+import dao.LmpProdutoDao;
+
 /**
  *
  * @author laura
  */
 public class LmpJDlgVendasItens extends javax.swing.JDialog {
+    LmpJDlgVendas lmpJDlgVendas;
     
     private boolean escuro = false;
 
@@ -21,6 +28,18 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
         initComponents();
         setTitle("Vendas Itens");
         setLocationRelativeTo(null);
+         lmpjTxtQuantidade.setText("1");
+        LmpProdutoDao lmpProdutoDao = new LmpProdutoDao();
+        List lista = (List) lmpProdutoDao.listAll();
+        for (Object object : lista) {
+            lmpjCboProduto.addItem((LmpProduto) object);
+        }
+        Util.habilitar(false, lmpjTxtValorUni, lmpjTxtTotal);
+       
+    }
+    
+    public void setTelaAnterior(LmpJDlgVendas lmpJDlgVendas) {
+        this.lmpJDlgVendas = lmpJDlgVendas;
     }
 
     /**
@@ -32,31 +51,41 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
+        lmpBtnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        lmpjCboProduto = new javax.swing.JComboBox<LmpProduto>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        lmpjTxtQuantidade = new javax.swing.JTextField();
+        lmpjTxtValorUni = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        lmpjTxtTotal = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lmpBtnOk = new javax.swing.JButton();
         jBtnModo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        lmpBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
+        lmpBtnCancelar.setText("Cancelar");
+        lmpBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                lmpBtnCancelarActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Produtos");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lmpjCboProduto.setModel(new javax.swing.DefaultComboBoxModel<LmpProduto>());
+        lmpjCboProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lmpjCboProdutoActionPerformed(evt);
+            }
+        });
+        lmpjCboProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lmpjCboProdutoKeyReleased(evt);
+            }
+        });
 
         jLabel2.setText("Quantidade");
 
@@ -64,11 +93,11 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
 
         jLabel4.setText("Total");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png"))); // NOI18N
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        lmpBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png"))); // NOI18N
+        lmpBtnOk.setText("OK");
+        lmpBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                lmpBtnOkActionPerformed(evt);
             }
         });
 
@@ -89,28 +118,28 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lmpjTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lmpjTxtValorUni, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lmpjTxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lmpjCboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(23, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(jButton1)
+                        .addComponent(lmpBtnOk)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton2))
+                        .addComponent(lmpBtnCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jBtnModo)))
@@ -122,7 +151,7 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lmpjCboProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -131,33 +160,38 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lmpjTxtValorUni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lmpjTxtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lmpjTxtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(lmpBtnOk)
+                    .addComponent(lmpBtnCancelar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jBtnModo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void lmpBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lmpBtnCancelarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_lmpBtnCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void lmpBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lmpBtnOkActionPerformed
         // TODO add your handling code here:
+        LmpVendasItens lmpVendasItens = new LmpVendasItens();
+        lmpVendasItens.setLmpProduto((LmpProduto) lmpjCboProduto.getSelectedItem());
+        lmpVendasItens.setLmpQuantidade(Util.strToInt(lmpjTxtQuantidade.getText()) );
+        lmpVendasItens.setLmpPrecoUnitario(Util.strToDouble(lmpjTxtValorUni.getText()) );                
+        lmpJDlgVendas.controllerVendItens.addBean(lmpVendasItens);
         setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_lmpBtnOkActionPerformed
 
     private void jBtnModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModoActionPerformed
         // TODO add your handling code here:
@@ -165,6 +199,27 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
         escuro = !escuro;
         jBtnModo.setText(escuro ? "☀ Modo Claro" : "🌙 Modo Escuro");
     }//GEN-LAST:event_jBtnModoActionPerformed
+
+    private void lmpjCboProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lmpjCboProdutoKeyReleased
+        // TODO add your handling code here:
+        if(lmpjTxtQuantidade.getText().isEmpty() == false){
+        LmpProduto lmpProduto = (LmpProduto) lmpjCboProduto.getSelectedItem();
+        int quant = Util.strToInt(lmpjTxtQuantidade.getText());
+        double preco = Util.strToDouble(lmpProduto.getLmpPreco());
+        lmpjTxtTotal.setText(Util.doubleToStr( quant * preco));
+       } else {
+           Util.limpar(lmpjTxtTotal);
+       }
+    }//GEN-LAST:event_lmpjCboProdutoKeyReleased
+
+    private void lmpjCboProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lmpjCboProdutoActionPerformed
+        // TODO add your handling code here:
+        LmpProduto lmpProduto = (LmpProduto) lmpjCboProduto.getSelectedItem();
+        lmpjTxtValorUni.setText(lmpProduto.getLmpPreco());
+        int quant = Util.strToInt(lmpjTxtQuantidade.getText());
+         double preco = Util.strToDouble(lmpProduto.getLmpPreco());
+        lmpjTxtTotal.setText(Util.doubleToStr( quant * preco));
+    }//GEN-LAST:event_lmpjCboProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,15 +265,15 @@ public class LmpJDlgVendasItens extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnModo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton lmpBtnCancelar;
+    private javax.swing.JButton lmpBtnOk;
+    private transient javax.swing.JComboBox<LmpProduto> lmpjCboProduto;
+    private javax.swing.JTextField lmpjTxtQuantidade;
+    private javax.swing.JTextField lmpjTxtTotal;
+    private javax.swing.JTextField lmpjTxtValorUni;
     // End of variables declaration//GEN-END:variables
 }
