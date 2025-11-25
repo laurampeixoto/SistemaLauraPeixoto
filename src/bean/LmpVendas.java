@@ -31,20 +31,23 @@ public class LmpVendas implements java.io.Serializable {
     private String lmpEnviado;
     private LmpClientes lmpClientes;
     private LmpFuncionarios lmpFuncionarios;
+    private LmpProduto lmpProduto;
+    
 
     public LmpVendas() {
     }
 
-    public LmpVendas(int lmpIdnumeroVenda, String lmpValorTotal, String lmpFormaPagamento, String lmpStatus, LmpClientes lmpClientes, LmpFuncionarios lmpFuncionarios) {
+    public LmpVendas(int lmpIdnumeroVenda, String lmpValorTotal, String lmpFormaPagamento, String lmpStatus, LmpClientes lmpClientes, LmpFuncionarios lmpFuncionarios, LmpProduto lmpProduto) {
         this.lmpIdnumeroVenda = lmpIdnumeroVenda;
         this.lmpValorTotal = lmpValorTotal;
         this.lmpFormaPagamento = lmpFormaPagamento;
         this.lmpStatus = lmpStatus;
         this.lmpClientes = lmpClientes;
         this.lmpFuncionarios = lmpFuncionarios;
+        this.lmpProduto = lmpProduto;
     }
 
-    public LmpVendas(int lmpIdnumeroVenda, String lmpCodigo, Date lmpDataVenda, String lmpValorTotal, String lmpFormaPagamento, String lmpStatus, String lmpEnviado, LmpClientes lmpClientes, LmpFuncionarios lmpFuncionarios, Set lmpVendasItenses) {
+    public LmpVendas(int lmpIdnumeroVenda, String lmpCodigo, Date lmpDataVenda, String lmpValorTotal, String lmpFormaPagamento, String lmpStatus, String lmpEnviado, LmpClientes lmpClientes, LmpFuncionarios lmpFuncionarios, LmpProduto lmpProduto, Set lmpVendasItenses) {
         this.lmpIdnumeroVenda = lmpIdnumeroVenda;
         this.lmpCodigo = lmpCodigo;
         this.lmpDataVenda = lmpDataVenda;
@@ -54,6 +57,7 @@ public class LmpVendas implements java.io.Serializable {
         this.lmpEnviado = lmpEnviado;
         this.lmpClientes = lmpClientes;
         this.lmpFuncionarios = lmpFuncionarios;
+        this.lmpProduto = lmpProduto;
     }
 
     @Id
@@ -141,5 +145,16 @@ public class LmpVendas implements java.io.Serializable {
     public void setLmpFuncionarios(LmpFuncionarios lmpFuncionarios) {
         this.lmpFuncionarios = lmpFuncionarios;
     }
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lmp_produto")
+    public LmpProduto getLmpProduto() {
+        return this.lmpProduto;
+    }
+
+    public void setLmpProduto(LmpProduto lmpProduto) {
+        this.lmpProduto = lmpProduto;
+    }
+    
 
 }

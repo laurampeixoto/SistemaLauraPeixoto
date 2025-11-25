@@ -29,16 +29,18 @@ public class LmpVendasItens  implements java.io.Serializable {
      private double lmpDesconto;
      private double lmpValorTotalItem;
 
+
     public LmpVendasItens() {
     }
 
 	
-    public LmpVendasItens(int lmpIdItemVendido, int lmpQuantidade, double lmpPrecoUnitario, double lmpDesconto, double lmpValorTotalItem) {
+    public LmpVendasItens(int lmpIdItemVendido, int lmpQuantidade, double lmpPrecoUnitario, double lmpDesconto, double lmpValorTotalItem, LmpVendas lmpVendas) {
         this.lmpIdItemVendido = lmpIdItemVendido;
         this.lmpQuantidade = lmpQuantidade;
         this.lmpPrecoUnitario = lmpPrecoUnitario;
         this.lmpDesconto = lmpDesconto;
         this.lmpValorTotalItem = lmpValorTotalItem;
+        this.lmpVendas = lmpVendas;
     }
     public LmpVendasItens(int lmpIdItemVendido, LmpProduto lmpProduto, LmpVendas lmpVendas, int lmpQuantidade, double lmpPrecoUnitario, double lmpDesconto, double lmpValorTotalItem) {
        this.lmpIdItemVendido = lmpIdItemVendido;
@@ -73,7 +75,7 @@ public class LmpVendasItens  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="lmp_idnumeroVenda")
+    @JoinColumn(name="lmp_vendas")
     public LmpVendas getLmpVendas() {
         return this.lmpVendas;
     }
@@ -122,7 +124,7 @@ public class LmpVendasItens  implements java.io.Serializable {
         this.lmpValorTotalItem = lmpValorTotalItem;
     }
 
-
+ 
 
 
 }
